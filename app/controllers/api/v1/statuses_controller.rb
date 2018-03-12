@@ -39,6 +39,9 @@ class Api::V1::StatusesController < Api::BaseController
   end
 
   def create
+    tracker do |t|
+      t.google_analytics :send, { type: 'event', category: 'status', action: 'create', label: 'user_action', value: '' }
+    end
     @status = PostStatusService.new.call(current_user.account,
                                          status_params[:status],
                                          status_params[:in_reply_to_id].blank? ? nil : Status.find(status_params[:in_reply_to_id]),
@@ -53,6 +56,9 @@ class Api::V1::StatusesController < Api::BaseController
   end
 
   def destroy
+    tracker do |t|
+      t.google_analytics :send, { type: 'event', category: 'status', action: 'delete', label: 'user_action', value: '' }
+    end
     @status = Status.where(account_id: current_user.account).find(params[:id])
     authorize @status, :destroy?
 

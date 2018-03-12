@@ -96,6 +96,9 @@ module Mastodon
 
     config.middleware.use Rack::Attack
     config.middleware.use Rack::Deflater
+    config.middleware.use(Rack::Tracker) do
+      handler :google_analytics, { tracker: 'UA-111514791-1' }
+    end
 
     config.to_prepare do
       Doorkeeper::AuthorizationsController.layout 'modal'
