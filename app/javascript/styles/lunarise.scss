@@ -1,0 +1,19 @@
+$ui-base-lighter-color: #BCBE92;
+$ui-base-color: #707E79;
+$ui-primary-color: #BCBE92;
+$ui-secondary-color:#d9e1e8;
+$ui-highlight-color: #D37933;
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}  
+}
+
+@include placeholder {
+    color: #d6d8bd;
+    font-weight:40;
+}
+
+@import 'application';
