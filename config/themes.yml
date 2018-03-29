@@ -1,2 +1,2 @@
-default: styles/application.scss
-Lunarise: styles/lunarise.scss
+default: styles/lunarise.scss
+mastodon: styles/application.scss
