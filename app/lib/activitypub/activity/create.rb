@@ -53,7 +53,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
       visibility: visibility_from_audience,
       thread: replied_to_status,
       conversation: conversation_from_uri(@object['conversation']),
-      media_attachments: process_attachments.take(4),
+      media_attachment_ids: process_attachments.take(4).map(&:id),
     }
   end
 
@@ -113,13 +113,13 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     media_attachments = []
 
     as_array(@object['attachment']).each do |attachment|
-      next if unsupported_media_type?(attachment['mediaType']) || attachment['url'].blank?
+      next if attachment['url'].blank?
 
       href             = Addressable::URI.parse(attachment['url']).normalize.to_s
       media_attachment = MediaAttachment.create(account: @account, remote_url: href, description: attachment['name'].presence, focus: attachment['focalPoint'])
       media_attachments << media_attachment
 
-      next if skip_download?
+      next if unsupported_media_type?(attachment['mediaType']) || skip_download?
 
       media_attachment.file_remote_url = href
       media_attachment.save
