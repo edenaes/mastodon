@@ -1,2 +1,3 @@
 default: styles/lunarise.scss
 mastodon: styles/application.scss
+contrast: styles/contrast.scss
