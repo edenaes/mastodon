@@ -16,6 +16,7 @@ class ActivityPub::Activity::Announce < ActivityPub::Activity
       reblog: original_status,
       uri: @json['id'],
       created_at: @json['published'],
+      override_timestamps: @options[:override_timestamps],
       visibility: original_status.visibility
     )
 
@@ -29,7 +30,7 @@ class ActivityPub::Activity::Announce < ActivityPub::Activity
     if object_uri.start_with?('http')
       return if ActivityPub::TagManager.instance.local_uri?(object_uri)
 
-      ActivityPub::FetchRemoteStatusService.new.call(object_uri, id: true)
+      ActivityPub::FetchRemoteStatusService.new.call(object_uri, id: true, on_behalf_of: @account.followers.local.first)
     elsif @object['url'].present?
       ::FetchRemoteStatusService.new.call(@object['url'])
     end
