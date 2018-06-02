@@ -42,6 +42,7 @@ import {
   Mutes,
   PinnedStatuses,
   Lists,
+  Trends,
 } from './util/async-components';
 import { HotKeys } from 'react-hotkeys';
 import { me } from '../../initial_state';
@@ -132,16 +133,19 @@ class SwitchingColumnsArea extends React.PureComponent {
   render () {
     const { children } = this.props;
     const { mobile } = this.state;
+    const redirect = mobile ? <Redirect from='/' to='/timelines/home' exact /> : <Redirect from='/' to='/getting-started' exact />;
 
     return (
       <ColumnsAreaContainer ref={this.setRef} singleColumn={mobile}>
         <WrappedSwitch>
-          <Redirect from='/' to='/getting-started' exact />
+          {redirect}
           <WrappedRoute path='/getting-started' component={GettingStarted} content={children} />
           <WrappedRoute path='/keyboard-shortcuts' component={KeyboardShortcuts} content={children} />
           <WrappedRoute path='/timelines/home' component={HomeTimeline} content={children} />
           <WrappedRoute path='/timelines/public' exact component={PublicTimeline} content={children} />
-          <WrappedRoute path='/timelines/public/local' component={CommunityTimeline} content={children} />
+          <WrappedRoute path='/timelines/public/media' component={PublicTimeline} content={children} componentParams={{ onlyMedia: true }} />
+          <WrappedRoute path='/timelines/public/local' exact component={CommunityTimeline} content={children} />
+          <WrappedRoute path='/timelines/public/local/media' component={CommunityTimeline} content={children} componentParams={{ onlyMedia: true }} />
           <WrappedRoute path='/timelines/direct' component={DirectTimeline} content={children} />
           <WrappedRoute path='/timelines/tag/:id' component={HashtagTimeline} content={children} />
           <WrappedRoute path='/timelines/list/:id' component={ListTimeline} content={children} />
@@ -151,6 +155,7 @@ class SwitchingColumnsArea extends React.PureComponent {
           <WrappedRoute path='/pinned' component={PinnedStatuses} content={children} />
 
           <WrappedRoute path='/search' component={Compose} content={children} componentParams={{ isSearchPage: true }} />
+          <WrappedRoute path='/trends' component={Trends} content={children} />
 
           <WrappedRoute path='/statuses/new' component={Compose} content={children} />
           <WrappedRoute path='/statuses/:statusId' exact component={Status} content={children} />
