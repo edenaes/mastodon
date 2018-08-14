@@ -339,6 +339,7 @@ ActiveRecord::Schema.define(version: 2018_07_11_152640) do
     t.string "website"
     t.string "owner_type"
     t.bigint "owner_id"
+    t.boolean "confidential", default: true, null: false
     t.index ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type"
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
