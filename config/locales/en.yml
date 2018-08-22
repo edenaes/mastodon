@@ -847,6 +847,7 @@ en:
     default: Lunarise
     mastodon: Mastodon
     contrast: High contrast
+    classick-witch: Classick Witch
   time:
     formats:
       default: "%b %d, %Y, %H:%M"

@@ -1,8 +1,10 @@
-$ui-base-lighter-color: #BCBE92;
-$ui-base-color: #707E79;
-$ui-primary-color: #BCBE92;
-$ui-secondary-color:#d9e1e8;
-$ui-highlight-color: #e69739;
+$ui-base-lighter-color: #929e9a;
+$ui-base-color: #261b2b;
+$ui-primary-color: #3A363B;
+$ui-secondary-color:#914C3E;
+$ui-highlight-color: #D37933;
+$primary-text-color: #F8F7F5;
+$darker-text-color: #707E79;
 
 @mixin placeholder {
   ::-webkit-input-placeholder {@content}

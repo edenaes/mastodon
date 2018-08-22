@@ -2,3 +2,4 @@ default: styles/lunarise.scss
 mastodon: styles/application.scss
 contrast: styles/contrast.scss
 mastodon-light: styles/mastodon-light.scss
+classick-witch: styles/classickWitch.scss
